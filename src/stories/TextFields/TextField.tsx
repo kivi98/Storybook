@@ -24,8 +24,10 @@ export const Xb_TextField = ({
       onChange={onChange}
       sx={{
         '&:hover': {
-          borderColor: 'blue',
-        },
+            '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'primary.main',
+            },
+        }
         }
       }
     />

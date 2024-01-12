@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "@mui/material";
-
+import Xb_theme  from '../GlobalTheme';
 interface ButtonProps {
   category: 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
   label: string;
@@ -10,46 +10,50 @@ interface ButtonProps {
 
 const colorMappings = {
   primary: {
-    backgroundColor: '#FF7518',
-    borderColor: '#FF7518',
-    color: 'white',
+    backgroundColor: Xb_theme().palette.primary.main,
+    borderColor: Xb_theme().palette.primary.main,
+    color: Xb_theme().palette.common.white,
   },
   secondary: {
     backgroundColor: 'transparent',
-    borderColor: '#FF7518',
-    color: '#FF7518',
+    borderColor: Xb_theme().palette.secondary.main,
+    color: Xb_theme().palette.primary.main,
   },
   success: {
-    backgroundColor: '#4BB543',
-    borderColor: '#4BB543',
-    color: 'white',
+    backgroundColor: Xb_theme().palette.success.main,
+    borderColor: Xb_theme().palette.success.main,
+    color: Xb_theme().palette.common.white,
   },
   error: {
-      backgroundColor: '#FF0000',
-      borderColor: '#FF0000',
-      color: 'white',
+      backgroundColor: Xb_theme().palette.error.main,
+      borderColor: Xb_theme().palette.error.main,
+      color: Xb_theme().palette.common.white,
   },
   info: {
-      backgroundColor: '#949494',
-      borderColor: '#949494',
-      color: 'white',
+      backgroundColor: Xb_theme().palette.info.main,
+      borderColor: Xb_theme().palette.info.main,
+      color: Xb_theme().palette.common.white,
   },
   warning: {
-      backgroundColor: '#C7C700',
-      borderColor: '#C7C700',
-      color: 'white',
+      backgroundColor: Xb_theme().palette.warning.main,
+      borderColor: Xb_theme().palette.warning.main,
+      color: Xb_theme().palette.common.white,
   },
 };
 
 function darken(color: string) {
-    const trimmedHex = color.slice(1).trim();
-    const [r, g, b] = [
-        parseInt(trimmedHex.slice(0, 2), 16),
-        parseInt(trimmedHex.slice(2, 4), 16),
-        parseInt(trimmedHex.slice(4, 6), 16),
-    ];
-    const darkenedRgb = [Math.floor(r * 0.9), Math.floor(g * 0.9), Math.floor(b * 0.9)];
-    return `#${darkenedRgb.map(component => component.toString(16).padStart(2, '0')).join('')}`;
+    if (color === 'transparent') {
+        return '#FFF9F5';
+    }else {
+        const trimmedHex = color.slice(1).trim();
+        const [r, g, b] = [
+            parseInt(trimmedHex.slice(0, 2), 16),
+            parseInt(trimmedHex.slice(2, 4), 16),
+            parseInt(trimmedHex.slice(4, 6), 16),
+        ];
+        const darkenedRgb = [Math.floor(r * 0.9), Math.floor(g * 0.9), Math.floor(b * 0.9)];
+        return `#${darkenedRgb.map(component => component.toString(16).padStart(2, '0')).join('')}`;
+    }
 }
 
 export const Xb_Button = ({
@@ -60,8 +64,10 @@ export const Xb_Button = ({
   }: ButtonProps) => {
   const { backgroundColor, borderColor, color } = colorMappings[category];
   const hoverColor = darken(backgroundColor);
-  const hoverBorderColor = darken(borderColor);
-
+  let hoverBorderColor = darken(borderColor);
+    if (category === 'secondary') {
+        hoverBorderColor = '#FF7518';
+    }
   return (
       <Button
           variant={category === 'secondary' ? 'outlined' : 'contained'}
