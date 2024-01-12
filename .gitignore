@@ -36,4 +36,9 @@ yarn-error.log*
 next-env.d.ts
 
 # Storybook
-/.storybook/*.js
+.storybook
+.storybook/*.js
+
+# Idea
+.idea
+```
