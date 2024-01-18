@@ -22,14 +22,6 @@ export const Xb_TextField = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      sx={{
-        '&:hover': {
-            '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'primary.main',
-            },
-        }
-        }
-      }
     />
   );
 };

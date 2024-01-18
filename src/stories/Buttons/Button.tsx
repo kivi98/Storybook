@@ -1,49 +1,53 @@
 import React from 'react';
 import { Button } from "@mui/material";
-import Xb_theme  from '../GlobalTheme';
+import Xb_common  from '../GlobalTheme';
+
+const Xb_button = Xb_common();
 interface ButtonProps {
-  category: 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
-  label: string;
-  size: 'small' | 'medium' | 'large';
-  onClick?: () => void;
+    category: 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
+    label: string;
+    size: 'small' | 'medium' | 'large';
+    onClick?: () => void;
 }
 
+
+
 const colorMappings = {
-  primary: {
-    backgroundColor: Xb_theme().palette.primary.main,
-    borderColor: Xb_theme().palette.primary.main,
-    color: Xb_theme().palette.common.white,
-  },
-  secondary: {
-    backgroundColor: 'transparent',
-    borderColor: Xb_theme().palette.secondary.main,
-    color: Xb_theme().palette.primary.main,
-  },
-  success: {
-    backgroundColor: Xb_theme().palette.success.main,
-    borderColor: Xb_theme().palette.success.main,
-    color: Xb_theme().palette.common.white,
-  },
-  error: {
-      backgroundColor: Xb_theme().palette.error.main,
-      borderColor: Xb_theme().palette.error.main,
-      color: Xb_theme().palette.common.white,
-  },
-  info: {
-      backgroundColor: Xb_theme().palette.info.main,
-      borderColor: Xb_theme().palette.info.main,
-      color: Xb_theme().palette.common.white,
-  },
-  warning: {
-      backgroundColor: Xb_theme().palette.warning.main,
-      borderColor: Xb_theme().palette.warning.main,
-      color: Xb_theme().palette.common.white,
-  },
+    primary: {
+        backgroundColor: Xb_button.palette.primary.main,
+        borderColor: Xb_button.palette.primary.main,
+        color: Xb_button.palette.common.white,
+    },
+    secondary: {
+        backgroundColor: 'transparent',
+        borderColor: Xb_button.palette.secondary.main,
+        color: Xb_button.palette.primary.main,
+    },
+    success: {
+        backgroundColor: Xb_button.palette.success.main,
+        borderColor: Xb_button.palette.success.main,
+        color: Xb_button.palette.common.white,
+    },
+    error: {
+        backgroundColor: Xb_button.palette.error.main,
+        borderColor: Xb_button.palette.error.main,
+        color: Xb_button.palette.common.white,
+    },
+    info: {
+        backgroundColor: Xb_button.palette.info.main,
+        borderColor: Xb_button.palette.info.main,
+        color: Xb_button.palette.common.white,
+    },
+    warning: {
+        backgroundColor: Xb_button.palette.warning.main,
+        borderColor: Xb_button.palette.warning.main,
+        color: Xb_button.palette.common.white,
+    },
 };
 
 function darken(color: string) {
-    if (color === 'transparent') {
-        return '#FFF9F5';
+    if (color=== 'transparent') {
+        return 'blur(5px)';
     }else {
         const trimmedHex = color.slice(1).trim();
         const [r, g, b] = [
@@ -55,36 +59,36 @@ function darken(color: string) {
         return `#${darkenedRgb.map(component => component.toString(16).padStart(2, '0')).join('')}`;
     }
 }
-
 export const Xb_Button = ({
-    category,
-    label,
-    onClick,
-    size = 'medium',
-  }: ButtonProps) => {
-  const { backgroundColor, borderColor, color } = colorMappings[category];
-  const hoverColor = darken(backgroundColor);
-  let hoverBorderColor = darken(borderColor);
+                              category,
+                              label,
+                              onClick,
+                              size = 'medium',
+                          }: ButtonProps) => {
+    const { backgroundColor, borderColor, color } = colorMappings[category];
+    const hoverColor = darken(backgroundColor);
+    let hoverBorderColor = darken(borderColor);
     if (category === 'secondary') {
         hoverBorderColor = '#FF7518';
     }
-  return (
-      <Button
-          variant={category === 'secondary' ? 'outlined' : 'contained'}
-          onClick={onClick}
-          sx={{
-            textTransform: 'none',
-            backgroundColor,
-            borderColor,
-            color,
-            '&:hover': {
-              backgroundColor: hoverColor,
-              borderColor: hoverBorderColor,
-            },
-          }}
-          size={size}
-      >
-        {label}
-      </Button>
-  );
+    return (
+        <Button
+            variant={'outlined' || 'contained' || 'text'}
+            onClick={onClick}
+            sx={{
+                textTransform: 'none',
+                backgroundColor,
+                borderColor,
+                color,
+                boxShadow: '1px 1px 5px px rgba(0,0,0,0.2)',
+                '&:hover': {
+                    backgroundColor: hoverColor,
+                    borderColor: hoverBorderColor,
+                },
+            }}
+            size={size}
+        >
+            {label}
+        </Button>
+    );
 };

@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
-const Xb_theme = () => ({
+const Xb_common = () => ({
     palette: {
         primary: {
             main: '#FF7518',
@@ -27,4 +27,32 @@ const Xb_theme = () => ({
     }
 });
 
-export default Xb_theme;
+export default Xb_common;
+
+export const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+        primary: {
+            main: '#333333',
+            contrastText: '#FFFFFF',
+        },
+        secondary: {
+            main: '#FC9A57',
+            contrastText: '#FFFFFF',
+        },
+    },
+});
+
+export const lightTheme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: {
+            main: '#ffffff',
+            contrastText: '#000000',
+        },
+        secondary: {
+            main: '#FC9A57',
+            contrastText: '#000000',
+        },
+    },
+});
